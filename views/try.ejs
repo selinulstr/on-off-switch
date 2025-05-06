@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles2.css">
+</head>
+<body>
+    <div class="switch-container">
+      <div class="switch-bg-text">Gear 5</div>
+    <label class="switch">
+        <input type="checkbox" id="toggleSwitch">
+        <span class="slider"></span>
+      </label></div>
+      
+      <div class="smoke-container"></div>
+      <audio id="bgMusic" src="music.mp3"></audio>
+</body>
+
+<script>
+const toggle = document.getElementById('toggleSwitch');
+const music = document.getElementById('bgMusic');
+const container = document.querySelector('.smoke-container');
+
+
+ 
+toggle.addEventListener('change', () => {
+  if (toggle.checked) {
+    // Anında başla: Müzik + duman
+    music.play();
+
+    for (let i = 0; i < 30; i++) {
+      const smoke = document.createElement('div');
+      smoke.classList.add('smoke');
+      smoke.style.left = `${Math.random() * 100}%`;
+      smoke.style.animationDelay = `${Math.random() * 3}s`;
+      container.appendChild(smoke);
+    }
+
+    document.body.classList.add('fade-bg');
+    setTimeout(() => {
+        document.body.classList.add('bg2-transition'); // bg2'yi geçiş ile ekle
+        document.body.classList.add('bg2-active'); // bg1 kaybolacak ve bg2 görünecek
+
+      // 10 saniye sonunda her şey sıfırlansın
+      setTimeout(() => {
+        // Müzik durdur
+        music.pause();
+        music.currentTime = 0;
+
+        // Dumanları temizle
+        container.innerHTML = '';
+
+        // Switch'i başlangıç pozisyonuna geri döndür
+      
+      }, 5000); // 5 saniye bg2'nin görünmesini bekle
+    }, 5000); // İlk 5 saniye sonra bg2'yi başlat
+  
+  }
+});
+
+</script>
+</html>

@@ -1,0 +1,161 @@
+body {
+    background: black;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    justify-content: center; 
+    align-items: center;   
+     
+      background-image: url("one.jpeg") no-repeat center center fixed;
+      background-size: cover;
+      transition: background-image 5s ease-in-out; 
+   
+  }
+  
+  
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('one.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -1;
+    opacity: 1;
+    transition: opacity 5s ease-out; 
+  }
+  body.fade-bg::before {
+    opacity: 0; 
+  }
+
+  body.bg2-active::before {
+    opacity: 0; 
+  }
+  body.bg2-transition {
+    background-image: url('two.jpeg'); 
+  }
+
+
+  .switch-container {
+    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.switch-bg-text {
+  position: absolute;
+  z-index: 0; 
+  font-size: 50px;
+  color: rgba(194, 19, 19); 
+  pointer-events: none; 
+}
+  .switch {
+    display: inline-block;
+    width: 300px;     
+    height: 80px;     
+    position: relative;
+    opacity: 0.8;
+    z-index: 1; 
+  }
+
+
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    transition: none;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+   
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    border-radius: 60px;
+    transition: background-color 10s ease;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .slider::before {
+    content: "";
+    position: absolute;
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    background-image: url('l.png'); 
+    background-size: cover; 
+    left: 3px;
+    top: 3px;
+  }
+  
+  .slider:before {
+    content: "";
+    position: absolute;
+    height: 75px;
+    width: 75px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 10s ease;
+    box-shadow: 0 0 10px 4px rgba(255,255,255,0.6);
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+    animation: glow 1s infinite;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(220px);
+  }
+
+  
+  .smoke-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .smoke {
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 30%, transparent 70%);
+    border-radius: 50%; 
+    opacity: 0.8;
+    animation: rise 10s linear;
+    pointer-events: none;
+    filter: blur(4px);
+  }
+  
+  @keyframes rise {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-1000px) scale(2);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px #00c6ff; }
+    50% { box-shadow: 0 0 20px #00c6ff; }
+  }
